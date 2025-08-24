@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; media-src 'self' https://assets.codepen.io; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; media-src 'self' https://assets.codepen.io; script-src 'self'"
+    />
+
+    <link rel="stylesheet" href="./main.css" />
+
+    <title>Get off your Z S reminder</title>
+  </head>
+  <body>
+    <div class="container">
+      <div id="counter" class="counter"></div>
+
+      <div class="button-wrap">
+        <button id="start-btn" class="start-button button circle play">
+          <div class="button-icon button-play-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill="currentColor"
+                d="m.001 1.165v21.669c.052.661.601 1.177 1.271 1.177.225 0 .436-.058.62-.16l-.006.003 21.442-10.8c.4-.192.671-.593.671-1.058s-.271-.867-.664-1.055l-.007-.003-21.442-10.8c-.177-.099-.388-.157-.613-.157-.672 0-1.223.521-1.27 1.181v.004z"
+              />
+            </svg>
+          </div>
+
+          <div class="button-icon button-pause-icon">
+            <svg viewBox="0 0 18 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill="currentColor"
+                d="m4.801 23.999h-3.6c-.662-.001-1.199-.537-1.2-1.2v-21.6c0-.663.537-1.2 1.2-1.201h3.6c.662.001 1.199.537 1.2 1.2v21.6c0 .663-.537 1.2-1.2 1.201z"
+              />
+              <path
+                fill="currentColor"
+                d="m16.8 23.999h-3.6c-.663 0-1.2-.537-1.2-1.2v-21.6-.001c0-.663.537-1.2 1.2-1.2h3.6c.663 0 1.2.537 1.2 1.2v21.6c0 .663-.537 1.2-1.2 1.2z"
+              />
+            </svg>
+          </div>
+        </button>
+
+        <button
+          title="Refresh Timer"
+          id="reset-btn"
+          class="reset-button button"
+        >
+          <svg viewBox="0 0 21 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              fill="currentColor"
+              d="m7.5 21 2.999-3v1.5c4.143 0 7.501-3.359 7.501-7.502 0-2.074-.842-3.952-2.202-5.309l2.114-2.124c1.908 1.901 3.088 4.531 3.088 7.437 0 5.798-4.7 10.498-10.498 10.498-.001 0-.001 0-.002 0v1.5zm-7.5-9c.007-5.796 4.704-10.493 10.499-10.5h.001v-1.5l3 3-3 3v-1.5s-.001 0-.002 0c-4.143 0-7.502 3.359-7.502 7.502 0 2.074.842 3.952 2.203 5.31l-2.112 2.124c-1.907-1.89-3.088-4.511-3.088-7.407 0-.01 0-.02 0-.03v.002z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div id="settings" class="settings">
+        <div class="form-fields">
+          <div class="duration">
+            <div class="duration-input-wrap">
+              <input
+                class="duration-input"
+                type="text"
+                id="duration"
+                value="20"
+                placeholder=""
+              />
+            </div>
+            <label for="duration">min</label>
+          </div>
+        </div>
+        <div>
+          <input type="checkbox" id="hide-duration-cb" /><label
+            for="hide-duration-cb"
+            >Hide duration in menubar</label
+          >
+        </div>
+      </div>
+    </div>
+    <div class="attribution">
+      <a href="https://freesound.org/people/deleted_user_7020630/sounds/378394/"
+        >School bell.wav</a
+      >
+      by
+      <a href="https://freesound.org/people/deleted_user_7020630/"
+        >deleted_user_7020630</a
+      >
+      <br />
+      License:
+      <a href="http://creativecommons.org/publicdomain/zero/1.0/"
+        >Creative Commons 0</a
+      >
+    </div>
+
+    <audio
+      id="player"
+      src="./378394__deleted_user_7020630__school-bell.wav"
+    ></audio>
+  </body>
+  <script src="./renderer.js"></script>
+</html>
