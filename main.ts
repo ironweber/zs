@@ -82,8 +82,9 @@ function createTray() {
 
 app.whenReady().then(() => {
   ipcMain.on("setTrayIcon", (event: Electron.IpcMainEvent, text: string) => {
-    const icon = createTrayImage(`ZS ${text}`)
-    tray.setImage(icon)
+    const duration = text ? `ZS ${text}` : 'ZS'
+    const image = createTrayImage(duration)
+    tray.setImage(image)
   })
 
   createWindow()

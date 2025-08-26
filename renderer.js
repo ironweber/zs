@@ -10,12 +10,11 @@ let CURRENT_TIMER = TIMER_DUR
 
 const d = document
 const duration = d.getElementById("duration")
-// const sitting = d.getElementById("sitting-dur")
 const counter = d.getElementById("counter")
 const player = d.getElementById("player")
 
 const startBtn = d.getElementById("start-btn")
-const stopBtn = d.getElementById("stop-btn")
+// const stopBtn = d.getElementById("stop-btn")
 const resetBtn = d.getElementById("reset-btn")
 
 const hideDurationCb = d.getElementById("hide-duration-cb")
@@ -29,6 +28,7 @@ function main() {
   let currentTime = startTime
 
   updateRemainingDuration(startTime, counter)
+  emitDuration(currentTime)
 
   hideDurationCb.addEventListener("click", () => {
     const value = localStorage.getItem("hide-menubar-duration")
@@ -37,6 +37,8 @@ function main() {
     } else {
       localStorage.setItem("hide-menubar-duration", 0)
     }
+
+    emitDuration(currentTime)
   })
 
   resetBtn.addEventListener("click", () => {
@@ -81,7 +83,7 @@ function main() {
       }
 
       updateRemainingDuration(currentTime, counter)
-      emitDuration()
+      emitDuration(currentTime)
     }, TIMER_DUR)
   })
 }
@@ -110,9 +112,10 @@ function updateRemainingDuration(currentTime, el) {
   }
 }
 function emitDuration(currentTime) {
-  if (localStorage.getItem("hide-menubar-duration") != 1) {
-    window?.electronAPI.setTrayIcon(formatTime(currentTime))
-  }
+  let hideMenubarDuration = localStorage.getItem("hide-menubar-duration")
+  hideMenubarDuration = +hideMenubarDuration === 1
+  const duration = hideMenubarDuration ? null : formatTime(currentTime)
+  window?.electronAPI.setTrayIcon(duration);
 }
 //
 // const information = document.getElementById('info')
