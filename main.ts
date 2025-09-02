@@ -66,10 +66,6 @@ function createTray() {
     tray.popUpContextMenu(contextMenu)
   })
 
-  // tray.on('double-click', (event) => {
-  //   console.log('here here')
-  // })
-
   tray.on("click", (event) => {
     if (win.isVisible()) {
       win.hide()
@@ -99,12 +95,6 @@ app.whenReady().then(() => {
   })
 })
 
-// app.on('activate', () => {
-//   if (BrowserWindow.getAllWindows().length === 0) {
-//     createWindow()
-//   }
-// })
-
 app.on("before-quit", () => {
   if (tray) {
     tray.destroy() // Destroy the tray icon when the app is about to quit
@@ -117,7 +107,7 @@ app.on("window-all-closed", () => {
   }
 })
 
-function positionAppWindow(win, tray) {
+function positionAppWindow(win: BrowserWindow, tray: Tray) {
   // // Calculate position to open near the tray
   const trayBounds = tray.getBounds()
 

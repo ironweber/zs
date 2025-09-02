@@ -20,7 +20,33 @@ const resetBtn = d.getElementById("reset-btn")
 const hideDurationCb = d.getElementById("hide-duration-cb")
 
 let timerId = 0
+function formatTime(currentTime) {
+  const remaingMins = Math.floor(currentTime / 60)
+  const remaingSecs = currentTime - remaingMins * 60
+  const remainingTime = `${remaingMins < 10 ? "0" + remaingMins : remaingMins}:${remaingSecs < 10 ? "0" + remaingSecs : remaingSecs}`
 
+  return remainingTime
+}
+
+function updateRemainingDuration(currentTime, el) {
+  const remainingTime = formatTime(currentTime)
+
+  if (el) {
+    el.innerHTML = remainingTime
+  }
+}
+
+function hideMenubarDuration() {
+  let hideMenubarDuration = localStorage.getItem("hide-menubar-duration")
+  hideMenubarDuration = +hideMenubarDuration === 1
+  return hideMenubarDuration
+}
+
+function emitDuration(currentTime) {
+  const isMenubarHidden = hideMenubarDuration()
+  const duration = isMenubarHidden ? null : formatTime(currentTime)
+  window?.electronAPI.setTrayIcon(duration);
+}
 function main() {
   player.volume = 0.25
   // Add the formatted time to the page on page load.
@@ -96,27 +122,7 @@ function setCurrentState(state) {
   }
 }
 
-function formatTime(currentTime) {
-  const remaingMins = Math.floor(currentTime / 60)
-  const remaingSecs = currentTime - remaingMins * 60
-  const remainingTime = `${remaingMins < 10 ? "0" + remaingMins : remaingMins}:${remaingSecs < 10 ? "0" + remaingSecs : remaingSecs}`
 
-  return remainingTime
-}
 
-function updateRemainingDuration(currentTime, el) {
-  const remainingTime = formatTime(currentTime)
-
-  if (el) {
-    el.innerHTML = remainingTime
-  }
-}
-function emitDuration(currentTime) {
-  let hideMenubarDuration = localStorage.getItem("hide-menubar-duration")
-  hideMenubarDuration = +hideMenubarDuration === 1
-  const duration = hideMenubarDuration ? null : formatTime(currentTime)
-  window?.electronAPI.setTrayIcon(duration);
-}
-//
 // const information = document.getElementById('info')
 // information.innerText = `This app is using Chrome (v${versions.chrome()}, Node.js (${versions.node()}), and Electron (${versions.electron()})`
