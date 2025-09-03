@@ -53,6 +53,11 @@ function main() {
   let startTime = duration.value * 60
   let currentTime = startTime
 
+  if (hideMenubarDuration()) {
+    if (hideDurationCb) {
+      hideDurationCb.checked = true
+    }
+  }
   updateRemainingDuration(startTime, counter)
   emitDuration(currentTime)
 
@@ -111,6 +116,9 @@ function main() {
       updateRemainingDuration(currentTime, counter)
       emitDuration(currentTime)
     }, TIMER_DUR)
+  })
+  duration.addEventListener('focus', () => {
+    duration.select()
   })
 }
 main()
