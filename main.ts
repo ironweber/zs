@@ -57,6 +57,8 @@ function createTray() {
     {
       label: "Exit",
       click: () => {
+        tray.destroy()
+        win.hide()
         app.quit()
       },
     },
@@ -78,9 +80,11 @@ function createTray() {
 
 app.whenReady().then(() => {
   ipcMain.on("setTrayIcon", (event: Electron.IpcMainEvent, text: string) => {
-    const duration = text ? `ZS ${text}` : 'ZS'
-    const image = createTrayImage(duration)
-    tray.setImage(image)
+    if (!win.isDestroyed()) {
+      const duration = text ? `ZS ${text}` : 'ZS'
+      const image = createTrayImage(duration)
+      tray.setImage(image)
+    }
   })
 
   createWindow()
@@ -99,11 +103,14 @@ app.on("before-quit", () => {
   if (tray) {
     tray.destroy() // Destroy the tray icon when the app is about to quit
   }
+  app.exit()
 })
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    tray.destroy() // Destroy the tray icon when the app is about to quit
     app.quit()
+
   }
 })
 

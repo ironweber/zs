@@ -1,5 +1,5 @@
 import { nativeImage } from "electron"
-import { createCanvas } from "canvas"
+import { createCanvas } from '@napi-rs/canvas'
 
 export function createTrayImage(text: string = "ZS") {
   const canvas = createCanvas(200, 200)
